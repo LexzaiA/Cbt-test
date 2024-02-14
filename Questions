@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Computer Based Test</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    .question {
+        display: none;
+    }
+    .question.active {
+        display: block;
+    }
+    .btn {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    .btn:hover {
+        background-color: #45a049;
+    }
+</style>
+</head>
+<body>
+<div class="question" id="question1">
+    <h3>Question 1: What is the capital of France?</h3>
+    <label><input type="radio" name="q1" value="Paris"> Paris</label><br>
+    <label><input type="radio" name="q1" value="London"> London</label><br>
+    <label><input type="radio" name="q1" value="Berlin"> Berlin</label><br>
+</div>
+
+<div class="question" id="question2">
+    <h3>Question 2: What is the largest planet in our solar system?</h3>
+    <label><input type="radio" name="q2" value="Jupiter"> Jupiter</label><br>
+    <label><input type="radio" name="q2" value="Saturn"> Saturn</label><br>
+    <label><input type="radio" name="q2" value="Earth"> Earth</label><br>
+</div>
+
+<!-- Add more questions here -->
+
+<button onclick="prevQuestion()" class="btn" id="prevBtn" style="display:none;">Previous</button>
+<button onclick="nextQuestion()" class="btn" id="nextBtn">Next</button>
+
+<button onclick="submitTest()" class="btn" id="submitBtn" style="display:none;">Submit</button>
+
+<script>
+    let currentQuestion = 1;
+    const totalQuestions = 2; // Update this if you add more questions
+
+    function showQuestion(n) {
+        const questions = document.querySelectorAll('.question');
+        questions.forEach(question => question.classList.remove('active'));
+        questions[n - 1].classList.add('active');
+
+        if (currentQuestion === 1) {
+            document.getElementById('prevBtn').style.display = 'none';
+        } else {
+            document.getElementById('prevBtn').style.display = 'inline-block';
+        }
+
+        if (currentQuestion === totalQuestions) {
+            document.getElementById('nextBtn').style.display = 'none';
+            document.getElementById('submitBtn').style.display = 'inline-block';
+        } else {
+            document.getElementById('nextBtn').style.display = 'inline-block';
+            document.getElementById('submitBtn').style.display = 'none';
+        }
+    }
+
+    function prevQuestion() {
+        if (currentQuestion > 1) {
+            currentQuestion--;
+            showQuestion(currentQuestion);
+        }
+    }
+
+    function nextQuestion() {
+        if (currentQuestion < totalQuestions) {
+            currentQuestion++;
+            showQuestion(currentQuestion);
+        }
+    }
+
+    function submitTest() {
+        // Implement code to save answers selected
+        alert('Test submitted!');
+    }
+
+    showQuestion(currentQuestion);
+</script>
+</body>
+</html>
